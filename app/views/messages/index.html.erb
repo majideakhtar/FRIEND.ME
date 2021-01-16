@@ -1,0 +1,52 @@
+
+<div class="panel panel-default" id="refreshMe" style="height: 300px; overflow-y: scroll">
+  <% if @over_5 %>
+  <%= link_to 'Show All', '?m=all', class: 'btn btn-link pull-right' %>
+  <% end %>
+  
+
+  <div id="response">
+    <% @messages.each do |message| %>
+    <% if message.body %>
+    <% user = User.find(message.user_id) %>
+    <div class="panel-heading">
+      <div class="header"><%= image_tag user_avatar(user, 20), class: "rounded-circle", style: "margin-right: 5px;" %> <strong><%= user.name.split()[0] %> </strong> says <small><%= time_ago_in_words(message.message_time) %> ago</small>
+      </div>
+      <div class="list">
+        <div class="item">
+          <%= message.body %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-10 col-md-offset-1" id="msg" >
+  <%= form_for [@conversation, @message], remote: true do |f| %>
+  <div class="form-group">
+    <%= f.text_area :body, class: "form-control", id: "chatbox", placeholder: "Say something ...", style: "margin-top: 15px;" %>
+  </div>
+  <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+  <div class="form-group">
+    <%= f.submit "Send Reply", class: "form-control btn btn-primary", id: "send_reply_btn" %>
+  </div>
+  <% end %>
+</div>
+<script type="text/javascript">
+  $(function(){
+    var messages = $('#refreshMe');
+    function init() {
+      messages.scrollTop(messages[0].scrollHeight);
+    }
+    window.setTimeout(init, 30);
+  });
+</script>
+
+<script>  
+  $("#chatbox").keypress(function(event) { 
+    if (event.keyCode === 13) { 
+      $("#send_reply_btn").click(); 
+    } 
+  }); 
+</script>  

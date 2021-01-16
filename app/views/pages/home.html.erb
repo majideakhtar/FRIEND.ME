@@ -1,0 +1,69 @@
+<div align="center">
+<h1>Dashboard</h1>
+<div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800" align="center"></h1>
+          </div>
+
+        <div class="row">
+
+
+           <i class="fa fa-bus" aria-hidden="true" style="font-size:36px"></i>
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1" align="center">Total Users</div>
+                      <div class="h3 mb-0 font-weight-bold text-gray-800" align="center"><h3 class="text-warning"><%= @users.count %></h3></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <i class="fa fa-list-alt" aria-hidden="true" style="font-size:36px"></i>
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-secondary  text-uppercase mb-1" align="center">Total Friends</div>
+                      <div class="h3 mb-0 font-weight-bold text-gray-800" align="center"><h3 class="text-warning"><%= @friendships.count %></h3></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <i class="fa fa-train" aria-hidden="true" style="font-size:36px"></i>
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-secondary  text-uppercase mb-1" align="center">Total Friendship Requests</div>
+                      <div class="h3 mb-0 font-weight-bold text-gray-800" align="center"><h3 class="text-warning"><%= @friend_requests.count %></h3></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <i class="fa fa-list-alt" aria-hidden="true" style="font-size:36px"></i>
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-secondary  text-uppercase mb-1" align="center">Total Train Bookings</div>
+                      <div class="h3 mb-0 font-weight-bold text-gray-800" align="center"><h3 class="text-warning"><%#= @train_bookings %></h3></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+</div>

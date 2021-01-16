@@ -1,0 +1,89 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= f.error_notification %>
+
+<div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+
+    <%= f.input :name,
+    required: true,
+    autofocus: true,
+
+    input_html: { size: 30, maxlength: 30, autocomplete: "name", :style => 'width: 500px' }%>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-4">
+                <%= image_tag user_avatar(resource, 100), class: "rounded-circle" %>
+            </div>
+            <div class="col-sm-8">
+                <%= f.file_field :profile_image %>
+            </div>
+        </div>
+
+    </div>
+    
+    <%= f.input :dob, :order => [:day, :month, :year], :as => :date, :start_year => 1940,
+    :end_year => Date.today.year - 16,
+    required: true,
+    autofocus: true,
+    input_html: { autocomplete: "dob", :style => 'width: 500px'  }%>
+    <%= f.input :gender,
+    as: :radio_buttons, collection: [ ['0','Female'], ['1','Male']], label_method: :second,
+
+    value_method: :first,
+    required: true,
+    autofocus: true,
+    input_html: { autocomplete: "gender" }%>
+    
+    
+    <%= f.input :mobile,
+    required: true,
+    autofocus: true,
+
+    input_html: { size: 20, maxlength: 15, autocomplete: "mobile", :style => 'width: 500px' }%>
+    <%= f.input :city,
+    required: true,
+    autofocus: true,
+
+    input_html: { size: 20, maxlength: 15, autocomplete: "city", :style => 'width: 500px' }%>
+    <%= f.input :likes,
+    required: true,
+    as: :text,
+    autofocus: true,
+    placeholder: 'Enter your likes ...',
+    input_html: { size: 40, maxlength: 40, autocomplete: "likes", :style => 'width: 500px; height: 100px' }%>
+    <%= f.input :dislikes,
+    required: true, 
+    as: :text,
+    autofocus: true,
+    placeholder: 'Enter your dislikes ...',
+    input_html: { size: 40, maxlength: 40, autocomplete: "dislikes", :style => 'width: 500px; height: 100px' }%>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <% end %>
+
+    <%= f.input :password,
+    hint: "leave it blank if you don't want to change it",
+    required: false,
+    input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+    required: false,
+    input_html: { autocomplete: "new-password" } %>
+    <%= f.input :current_password,
+    hint: "we need your current password to confirm your changes",
+    required: true,
+    input_html: { autocomplete: "current-password" } %>
+</div>
+
+<div class="form-actions" style="margin-bottom: 15px;">
+    <%= f.button :submit, "Update", class: "btn btn-outline-info" %>
+</div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back, class: "btn btn-outline-info" %>

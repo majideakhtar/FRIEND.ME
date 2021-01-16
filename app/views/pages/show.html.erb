@@ -1,0 +1,67 @@
+<div class="jumbotron">
+	<h2>Profile details</h2>
+	<p>
+		<strong>Name:</strong>
+		<%= @user.name %>
+	</p>
+	<p class ="dp-container">
+		<!-- <strong>DP:</strong> -->
+
+		<%= image_tag(@user.profile_image, style: "width: 300px; height: 300px;") if @user.profile_image.present? %>
+	</p>
+
+
+	<p>
+		<strong>Gender:</strong>
+		<% if(@user.gender) %>
+		<%= "Male" %>
+		<% else %>
+		<%= "Female" %>
+		<% end %>
+	</p>
+
+	<p>
+		<strong>City:</strong>
+		<%= @user.city %>
+	</p>
+
+	<p>
+		<strong>Email:</strong>
+		<%= @user.email %>
+	</p>
+
+	<p>
+		<strong>Date of Birth:</strong>
+		<%= @user.dob.strftime("%a, %d %b, %Y") %>
+	</p>
+	<p>
+		<strong>Age:</strong>
+
+		<%= ((Time.now - @user.dob.to_time) / 1.year.seconds).floor %>
+	</p>
+	<p>
+		<strong>Likes:</strong>
+		<%= @user.likes %>
+	</p>
+	<p>
+		<strong>Dislikes:</strong>
+		<%= @user.dislikes %>
+	</p>
+
+	<p>
+		<strong>Mobile Number:</strong>
+		<%= @user.mobile %>
+	</p>
+
+	<div class="text-center">
+		<%= link_to 'Back', pages_path, {:class => "btn btn-primary"} %>
+		<% if @friendships.where(sender_id: current_user.id, recipient_id: @user.id, status: ["requested", "pending", "accepted"]).blank? %>
+		<%= link_to 'Request', send_request_path(id: @user.id), {:class => "btn btn-success"} %>
+		<% end %>
+
+	</div>
+
+</div>
+
+
+

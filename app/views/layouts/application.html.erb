@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Friendly
+  
+  </title><link rel = "icon" type = "image/png" href = "/assets/icon.png">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <!-- <%= action_cable_meta_tag %> -->
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application' %>
+</head>
+
+<body>
+  <%= render 'layouts/navbar' %><br><br><br>
+  <%= render 'layouts/alerts' %>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

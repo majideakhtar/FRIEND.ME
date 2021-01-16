@@ -1,0 +1,74 @@
+<h2>Sign up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    
+    <div class="row">
+      <div class="col-sm-8">
+            <%= f.input :name,
+                required: true,
+                autofocus: true,
+
+                input_html: { size: 30, maxlength: 30, autocomplete: "name", :style => 'width: 500px' }%>
+      </div>
+    </div>
+
+    
+    Add Profile Pic : <%= f.file_field :profile_image %>
+    <%= f.input :dob, :order => [:day, :month, :year], :as => :date, :start_year => 1940,
+    :end_year => Date.today.year - 16,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "dob", :style => 'width: 500px'  }%>
+    <%= f.input :gender,
+                default: "Male",
+                as: :radio_buttons, collection: [ ['0','Female'], ['1','Male']], label_method: :second,
+                value_method: :first,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "gender" }%>
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                placeholder: 'user@domain.com',
+                input_html: { autocomplete: "email", :style => 'width: 500px' }%>
+    <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password", :style => 'width: 500px' } %>
+    <%= f.input :password_confirmation,
+                required: true,
+                input_html: { autocomplete: "new-password", :style => 'width: 500px' } %>
+    <%= f.input :mobile,
+                required: true,
+                autofocus: true,
+
+                input_html: { size: 20, maxlength: 15, autocomplete: "mobile", :style => 'width: 500px' }%>
+    <%= f.input :city,
+                required: true,
+                autofocus: true,
+
+                input_html: { size: 20, maxlength: 15, autocomplete: "city", :style => 'width: 500px' }%>
+    <%= f.input :likes,
+                required: true,
+                as: :text,
+                autofocus: true,
+                placeholder: 'Enter your likes ...',
+                input_html: { size: 40, maxlength: 40, autocomplete: "likes", :style => 'width: 500px; height: 100px' }%>
+    <%= f.input :dislikes,
+                required: true, 
+                as: :text,
+                autofocus: true,
+                placeholder: 'Enter your dislikes ...',
+                input_html: { size: 40, maxlength: 40, autocomplete: "dislikes", :style => 'width: 500px; height: 100px' }%>
+  </div>
+
+
+  <div class="form-actions" style="margin-bottom: 15px;">
+    <%= f.button :submit, "Sign up", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

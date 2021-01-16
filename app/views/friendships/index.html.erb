@@ -1,0 +1,71 @@
+<h1> Friendships</h1>
+
+<div class="container" id="users-content">
+  <% if current_user %>
+  <table class="table table-hover table-bordered" id="users-list">
+    <thead class="thead-dark">
+      <tr>
+        <th>Display</th>
+        <th>Name</th>
+        <!-- <th>Gender</th> -->
+        <th>Email</th>
+        <th>City</th>
+        <th>Date of Birth</th>
+        <th>Likes</th>
+        <th>Status</th>
+        <th>Friend since</th>
+        <th colspan="4">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody id="usersList">
+      <% @friendships.each do |friendship| %>
+      <% if friendship.recipient != current_user %>
+      <% if friendship.sender == current_user || friendship.recipient == current_user %>
+      <tr data-link="<%= page_path(friendship.recipient) %>">
+        <td><%= image_tag user_avatar(friendship.recipient, 80), class: "", style: "border-radius: 15px 45px 30px 15px; margin-right: 5px;" %></td>
+        <td><strong><%= friendship.recipient.name %></strong></td>
+        <!-- <td><% if(friendship.recipient.gender) %>
+        	<%= "Male" %>
+        	<% else %>
+        	<%= "Female" %>
+        	<% end %>
+        </td> -->
+        <td><%= friendship.recipient.email %></td>
+        <td><%= friendship.recipient.city %></td>
+        
+        <td><%= friendship.recipient.dob.strftime("%a, %d %b, %Y") %></td>
+        <td><%= friendship.recipient.likes%></td>
+        <td><%= friendship.status %></td>
+        <% if friendship.status == "accepted" %>
+        <td><%= time_ago_in_words(friendship.updated_at) %> ago</td>
+        <td><%= link_to 'Chat', conversations_path(sender_id: current_user.id, recipient_id: friendship.recipient.id), method: "post", class: "btn btn-info "%></td>
+        <td><%= link_to 'info', page_path(id: friendship.recipient_id), class: "btn btn-dark " %></td>
+        
+        <td><%= link_to 'X', unfriend_request_path(recipient_id: friendship.recipient_id, sender_id: friendship.sender_id), data: { confirm: 'Are you sure?' }, class: "btn btn-danger ", style: "padding: 10px;" %></td>
+        
+        <% end %>
+        <% if friendship.status == "requested" %>
+        <td><%= link_to 'Approve', approve_request_path(recipient_id: friendship.recipient_id), data: { confirm: 'Are you sure?'}, class: "btn-sm btn-success " %> | <%= link_to 'Reject', unfriend_request_path(recipient_id: friendship.recipient_id, sender_id: friendship.sender_id), data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger " %></td><td></td>
+        <td><%= link_to 'info', page_path(id: friendship.recipient_id), class: "btn btn-dark " %></td>
+        
+        <% end %>
+      </tr>
+      <% end %>
+      <% end %>
+      <% end %>
+
+    </tbody>
+  </table>
+  <% else %>
+  <h3>There is nothing to display if you are not logged in, please <%= link_to " Log in ", new_user_session_path %></h3>
+  <% end %>
+
+</div>
+
+
+<script type="text/javascript">
+  $("tr[data-link]").click(function() {
+  window.location = $(this).data("link")
+})
+</script>
